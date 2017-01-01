@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+        
+        <script>
+            function funkcija()
+            {
+                var htxp = new XMLHttpRequest();
+                
+                htxp.onreadystatechange = function()
+                {
+                    if(htxp.readyState==4)
+                        {
+                           alert("proslo"); document.getElementById("paragraf").innerHTML=htxp.status;
+                        }                
+
+                }
+                
+                htxp.open("GET","nez.txt",true);
+                htxp.send();
+            }
+        </script>
+        
+    </head>
+
+    
+    <body>
+        <p id="paragraf"></p>
+
+        <button  onclick="funkcija()">asd</button>
+        
+    </body>
+    
+</html>

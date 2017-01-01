@@ -1,0 +1,43 @@
+<?php
+
+
+$username = $_REQUEST["q"];
+$dbhost = 'localhost';
+$dbuser = 'root';
+$dbpass = '';
+$conn = mysql_connect($dbhost, $dbuser, $dbpass);
+if(! $conn ) {
+die('Could not connect: ' . mysql_error());
+}
+
+ mysql_select_db('adamstanicspirala_db');
+ 
+ $sql = 'DELETE FROM korisnici WHERE username="'.$username.'"';
+ $retval = mysql_query( $sql, $conn );
+ if(! $retval ) {
+ die('Could not get data: ' . mysql_error());
+ }
+/*
+$file = 'korisnici.xml';
+    if(!$xml = simplexml_load_file($file))
+        exit('Failed to open '.$file);
+
+	$ime = $_REQUEST["q"];
+	$nodeToRemove=null;
+	foreach($xml->children() as $artikal){
+
+	if($artikal->username == $ime)
+	{
+		$nodeToRemove = $artikal;
+	}
+	
+}
+	
+	if($nodeToRemove!=null)
+	{
+		unset($nodeToRemove[0]);
+	}
+	echo $xml->saveXML("korisnici.xml");
+*/	
+
+?>
