@@ -13,8 +13,8 @@
 	$response="";
 	
 	$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = '';
+$dbuser = 'spirala';
+$dbpass = 'password';
 $conn = ($GLOBALS["___mysqli_ston"] = mysqli_connect($dbhost,  $dbuser,  $dbpass));
 if(! $conn ) {
 die('Could not connect: ' . mysqli_error($GLOBALS["___mysqli_ston"]));

@@ -31,8 +31,8 @@ $file = 'korisnici.xml';
 	}
 	
 $dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = '';
+$dbuser = 'spirala';
+$dbpass = 'password';
 $conn = mysql_connect($dbhost, $dbuser, $dbpass);
 if(! $conn ) {
 die('Could not connect: ' . mysql_error());
