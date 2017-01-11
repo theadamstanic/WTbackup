@@ -3,18 +3,18 @@
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
-$conn = mysql_connect($dbhost, $dbuser, $dbpass);
+$conn = ($GLOBALS["___mysqli_ston"] = mysqli_connect($dbhost,  $dbuser,  $dbpass));
  if(! $conn ) {
- die('Could not connect: ' . mysql_error());
+ die('Could not connect: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
  }
  //echo 'Connected successfully';
  
 
 	  
- $sql = 'DROP Database AdamStanicSpirala_db';
- $retval = mysql_query($sql, $conn);
+ $sql = 'DROP Database adamstanicspirala_db';
+ $retval = mysqli_query( $conn, $sql);
  if(! $retval ) {
- die('Could not create database: ' . mysql_error());
+ die('Could not create database: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
  }
 
 ?>

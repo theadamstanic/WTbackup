@@ -3,11 +3,11 @@
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
-$conn = mysql_connect($dbhost, $dbuser, $dbpass);
+$conn = ($GLOBALS["___mysqli_ston"] = mysqli_connect($dbhost,  $dbuser,  $dbpass));
 if(! $conn ) {
-die('Could not connect: ' . mysql_error());
+die('Could not connect: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
 }
-	mysql_select_db('adamstanicspirala_db');
+	mysqli_select_db($GLOBALS["___mysqli_ston"], 'adamstanicspirala_db');
 
 	$index = 0;
 	$rel=0;
@@ -51,9 +51,9 @@ die('Could not connect: ' . mysql_error());
 	}
 	
 	
-	$retval = mysql_query( $sql, $conn );
+	$retval = mysqli_query( $conn ,  $sql);
 		 if(! $retval ) {
-		 die('Could not get data: ' . mysql_error());
+		 die('Could not get data: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
 		 }
 	
 	

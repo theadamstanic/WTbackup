@@ -33,19 +33,19 @@ $file = 'korisnici.xml';
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
-$conn = mysql_connect($dbhost, $dbuser, $dbpass);
+$conn = ($GLOBALS["___mysqli_ston"] = mysqli_connect($dbhost,  $dbuser,  $dbpass));
 if(! $conn ) {
-die('Could not connect: ' . mysql_error());
+die('Could not connect: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
 }
 
 
 $sql = 'SELECT username FROM korisnici';
- mysql_select_db('adamstanicspirala_db');
- $retval = mysql_query( $sql, $conn );
+ mysqli_select_db($GLOBALS["___mysqli_ston"], 'adamstanicspirala_db');
+ $retval = mysqli_query( $conn ,  $sql);
  if(! $retval ) {
- die('Could not get data: ' . mysql_error());
+ die('Could not get data: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
  }
- while($row = mysql_fetch_assoc($retval)) {
+ while($row = mysqli_fetch_assoc($retval)) {
   //"EMP ID :{$row['naziv']} " . " CIJENA : {$row['cijena']}" ;
   array_push($usernamesBaza,"{$row['username']}");
   /*array_push($cijeneBaza,"{$row['cijena']}");
@@ -115,10 +115,10 @@ for($i=0;$i<count($imena);$i++)
 
 		"'.$emailsRazlika[$i].'") ' ;
 		
-		//mysql_select_db('adamstanicspirala_db');
-	 $retval = mysql_query($sql, $conn);
+		//mysql_select_db(''adamstanicspirala_db'');
+	 $retval = mysqli_query( $conn, $sql);
 	 if(! $retval ) {
-	 die('Could not enter data: ' . mysql_error());
+	 die('Could not enter data: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
 	 }
 	}
 
@@ -132,7 +132,7 @@ for($i=0;$i<count($imena);$i++)
 	"'.$cijene[$i].'",
 	"'.$ikone[$i].'")' ;
 	
-	mysql_select_db('adamstanicspirala_db');
+	mysql_select_db(''adamstanicspirala_db'');
  $retval = mysql_query($sql, $conn);
  if(! $retval ) {
  die('Could not enter data: ' . mysql_error());

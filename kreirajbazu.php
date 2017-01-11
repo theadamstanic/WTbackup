@@ -3,18 +3,18 @@
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
-$conn = mysql_connect($dbhost, $dbuser, $dbpass);
+$conn = ($GLOBALS["___mysqli_ston"] = mysqli_connect($dbhost,  $dbuser,  $dbpass));
  if(! $conn ) {
- die('Could not connect: ' . mysql_error());
+ die('Could not connect: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
  }
  //echo 'Connected successfully';
  
 
 	  
- $sql = 'CREATE Database IF NOT EXISTS AdamStanicSpirala_db';
- $retval = mysql_query($sql, $conn);
+ $sql = 'CREATE Database IF NOT EXISTS adamstanicspirala_db';
+ $retval = mysqli_query( $conn, $sql);
  if(! $retval ) {
- die('Could not create database: ' . mysql_error());
+ die('Could not create database: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
  }
  
 
@@ -36,15 +36,15 @@ $conn = mysql_connect($dbhost, $dbuser, $dbpass);
  
  'primary key (id))';
 	 
-mysql_select_db("AdamStanicSpirala_db");	 
-$retval = mysql_query($sql, $conn);
+mysqli_select_db($GLOBALS["___mysqli_ston"], 'adamstanicspirala_db');	 
+$retval = mysqli_query( $conn, $sql);
  if(! $retval ) {
- die('Could not create table: ' . mysql_error());
+ die('Could not create table: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
  }
  
- $retval = mysql_query($sql2, $conn);
+ $retval = mysqli_query( $conn, $sql2);
  if(! $retval ) {
- die('Could not create table: ' . mysql_error());
+ die('Could not create table: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
  }
  
  //echo "Table employee created successfully\n";*/

@@ -10,12 +10,12 @@ $brojac=0;
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
-$conn = mysql_connect($dbhost, $dbuser, $dbpass);
+$conn = ($GLOBALS["___mysqli_ston"] = mysqli_connect($dbhost,  $dbuser,  $dbpass));
 if(! $conn ) {
-die('Could not connect: ' . mysql_error());
+die('Could not connect: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
 }
 
- mysql_select_db('adamstanicspirala_db');
+ mysqli_select_db($GLOBALS["___mysqli_ston"], 'adamstanicspirala_db');
  
 
 if(isset($_REQUEST["tip"]) && $_REQUEST["tip"]=="korisnici")
@@ -25,11 +25,11 @@ if($tip)
 {
 	
 	$sql = 'SELECT id,username,ime,prezime,password,tip,email FROM korisnici';
- $retval = mysql_query( $sql, $conn );
+ $retval = mysqli_query( $conn ,  $sql);
  if(! $retval ) {
- die('Could not get data: ' . mysql_error());
+ die('Could not get data: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
  }
- while($row = mysql_fetch_assoc($retval)) {
+ while($row = mysqli_fetch_assoc($retval)) {
 	 
 	 $el1=strtolower("{$row['ime']}");
 	 $el2=strtolower($str);
@@ -77,11 +77,11 @@ if($tip)
 else
 {
 	$sql = 'SELECT naziv FROM artikli';
- $retval = mysql_query( $sql, $conn );
+ $retval = mysqli_query( $conn ,  $sql);
  if(! $retval ) {
- die('Could not get data: ' . mysql_error());
+ die('Could not get data: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
  }
- while($row = mysql_fetch_assoc($retval)) {
+ while($row = mysqli_fetch_assoc($retval)) {
 	 
 	$el1 = strtolower("{$row['naziv']}");
 		$el2 = strtolower($str);

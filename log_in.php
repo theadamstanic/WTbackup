@@ -54,6 +54,9 @@ if($pronadjen==false)
 
 }
 
+
+ucitajizXML();
+return;
 $username = $_REQUEST['username'];
 $password= $_REQUEST['password'];
 
@@ -66,13 +69,13 @@ $pronadjen=false;
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
-$conn = mysql_connect($dbhost, $dbuser, $dbpass);
+$conn = ($GLOBALS["___mysqli_ston"] = mysqli_connect($dbhost,  $dbuser,  $dbpass));
 if(! $conn ) {
     
     
 }
 
- if(!mysql_select_db('adamstanicspirala_db'))
+ if(!mysqli_select_db($GLOBALS["___mysqli_ston"], 'adamstanicspirala_db'))
  {
      ucitajizXML();
      
@@ -81,11 +84,11 @@ else
 {
  
  $sql = 'SELECT username,password,tip FROM korisnici';
- $retval = mysql_query( $sql, $conn );
+ $retval = mysqli_query( $conn ,  $sql);
  if(! $retval ) {
- die('Could not get data: ' . mysql_error());
+ die('Could not get data: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
  }
- while($row = mysql_fetch_assoc($retval)) 
+ while($row = mysqli_fetch_assoc($retval)) 
 {
 
 	if("{$row['username']}"==$username)
