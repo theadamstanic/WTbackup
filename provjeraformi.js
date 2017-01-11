@@ -274,6 +274,7 @@ function login(us,pass)
 	{
 		if(this.readyState==4 && this.status==200)
 		{
+            alert(this.responseText);
 			//alert(this.responseText);
 			if(this.responseText=="true admin")
 			{

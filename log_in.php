@@ -4,6 +4,56 @@ session_start();
 
 
 
+function ucitajizXML()
+{
+    
+    $username=$_REQUEST['username'];
+    $password=$_REQUEST['password'];
+    
+    $username = htmlspecialchars($username, ENT_QUOTES, "UTF-8");
+    $password = htmlspecialchars($password, ENT_QUOTES, "UTF-8");
+    
+    $file = 'korisnici.xml';
+    if(!$xml = simplexml_load_file($file))
+        exit('Failed to open '.$file);
+
+foreach($xml->children() as $korisnik)
+{
+	if($korisnik->username==$username)
+	{
+		if($korisnik->password==$password)
+		{
+			$pronadjen=true;
+
+			if($korisnik->tip=="admin")
+			{
+				$_SESSION["username"]=$username;
+				$_SESSION["tip"]="admin";
+				echo "true admin";
+
+				
+			}
+			else
+			{
+				$_SESSION["username"]=$username;
+				$_SESSION["tip"]="obicni";
+				echo "true";
+			}
+	
+		}
+	}
+	
+}
+if($pronadjen==false)
+{
+	$_SESSION["username"]="none";
+				$_SESSION["tip"]="none";
+				echo "false";
+}
+
+
+}
+
 $username = $_REQUEST['username'];
 $password= $_REQUEST['password'];
 
@@ -18,10 +68,17 @@ $dbuser = 'root';
 $dbpass = '';
 $conn = mysql_connect($dbhost, $dbuser, $dbpass);
 if(! $conn ) {
-die('Could not connect: ' . mysql_error());
+    
+    
 }
 
- mysql_select_db('adamstanicspirala_db');
+ if(!mysql_select_db('adamstanicspirala_db'))
+ {
+     ucitajizXML();
+     
+ }
+else
+{
  
  $sql = 'SELECT username,password,tip FROM korisnici';
  $retval = mysql_query( $sql, $conn );
@@ -59,6 +116,8 @@ if($pronadjen==false)
 	$_SESSION["username"]="none";
 				$_SESSION["tip"]="none";
 				echo "false";
+}
+    
 }
 /*$file = 'korisnici.xml';
     if(!$xml = simplexml_load_file($file))
