@@ -30,7 +30,7 @@ $file = 'korisnici.xml';
 			
 	}
 	
-$dbhost = 'localhost';
+$dbhost=getenv('MYSQL_SERVICE_HOST');
 $dbuser = 'spirala';
 $dbpass = 'password';
 $conn = ($GLOBALS["___mysqli_ston"] = mysqli_connect($dbhost,  $dbuser,  $dbpass));

@@ -7,7 +7,7 @@ $rezultat ="";
 $tip=false;
 $brojac=0;
 
-$dbhost = 'localhost';
+$dbhost=getenv('MYSQL_SERVICE_HOST');
 $dbuser = 'spirala';
 $dbpass = 'password';
 $conn = ($GLOBALS["___mysqli_ston"] = mysqli_connect($dbhost,  $dbuser,  $dbpass));

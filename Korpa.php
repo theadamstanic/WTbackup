@@ -1,7 +1,6 @@
 <?php
-session_start();
+			session_start();
 ?>
-
 <!DOCTYPE HTML>
 <html>
 
@@ -174,12 +173,113 @@ session_start();
     
     <div class="kolona cetri" id="korpica">
     
-            <h1>Vaša korpa dolazi uskoro</h1>
-			<!--<h2>Klik na element da ga se izbrise</h2>-->
             
+
+
+			<?php 
+			
+
+			if(isset($_SESSION["username"]) && $_SESSION["username"]!="none" && count($_SESSION["korpa"])>0)
+			{
+				$ids=array();
+				$nazivi=array();
+				$ikone=array();
+				$cijene=array();
+				foreach($_SESSION["korpa"] as $element)
+				{
+					$i=0;
+					$id="";
+					$naziv="";
+					$ikona="";
+					$cijena="";
+					while($element[$i]!=",")
+					{
+						$id=$id.$element[$i];
+						$i++;
+					}
+					$i++;
+					while($element[$i]!=",")
+					{
+						$naziv=$naziv.$element[$i];
+						$i++;
+					}
+					$i++;
+					while($element[$i]!="|")
+					{
+						$cijena=$cijena.$element[$i];
+						$i++;
+					}
+					$i++;
+					while($element[$i]!="#")
+					{
+						$ikona=$ikona.$element[$i];
+						$i++;
+					}
+					
+					array_push($ids,$id);array_push($nazivi,$naziv);array_push($cijene,$cijena);array_push($ikone,$ikona);
+				}
+				
+				$kolicine=array();
+				$kljucevi=array();
+				$kljucevinazivi=array();
+				$kljucevicijene=array();
+				$kljuceviikone=array();
+				$k=0;
+				foreach($ids as $artikal)
+				{
+					$brojac=0;
+					for($j=0;$j<count($ids);$j++)
+					{
+						if($artikal == $ids[$j])
+							$brojac++;
+					}
+					if(!in_array($artikal,$kljucevi))
+					{
+						array_push($kljucevi,$artikal);
+						array_push($kolicine,$brojac);
+						array_push($kljucevinazivi,$nazivi[$k]);
+						array_push($kljucevicijene,$cijene[$k]);
+						array_push($kljuceviikone,$ikone[$k]);
+						
+						
+					}
+					$k++;
+				}
+				
+				$string ="<table style='border:1px solid black'>";
+				
+				for($i=0;$i<count($kljucevi);$i++)
+				{
+					$ssss = "onclick='izbaciIzKorpe(\" " . $kljucevi[$i] . " \") ' " ;
+		
+					//$string=$string."<tr>" . " <td>Artikal " . $kljucevinazivi[$i] . "</td><td> Cijena " . $kljucevicijene[$i] . " </td><td>Kolicina " . $kolicine[$i] . "</td><td onclick='izbaciIzKorpe(\" " . $kljucevi[$i] . " \") ' > Smanji kolicinu </td></tr>"; 
+					
+					$string=$string."<div class='kolona kartica'  >" .
+					"<div class = 'ikona_div' > " . "<img class='ikona' src = ' " . $kljuceviikone[$i] . " ' onclick='fullscreenfunkcijaon(this) ' >" .
+					"</div> <div></div> <p class = 'naziv' > " . $kljucevinazivi[$i] . "</p>" .
+					"<p class = 'cijena' > " . $kljucevicijene[$i] . "</p>" .
+					"<p class='cijena' onclick='izbaciIzKorpe(" . $kljucevi[$i] . ")'> Kolicina " . $kolicine[$i] . "</p>" .
+					"<div class= 'korpa_div' " . $ssss . "> izbaci iz korpe </div>  </div> </div>" ;
+				}
+				$string=$string."<table>";
+				echo "<h1>Vasa korpa sadzi</h1>";
+				echo "<div class='kolona cetri' id='artikli_kataloga'>" . $string . "</div>
+				<br><br><br> <input type='button' value='Zavrsi kupovinu' onclick='zavrsiKupovinu()'>";
+				?>
+				
+				
+				
+			<?php }
+			else
+			{?>
+		
+			<h1>Niste logovani ili vam je korpa prazna </h1>
+			
+			<?php } ?>
+            <h1 id="hvala"></h1>
         
 		
-		<br><br><br><br><br>
+	</div>
     </div>
 </div>   
         </div>

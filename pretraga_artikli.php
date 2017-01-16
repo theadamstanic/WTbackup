@@ -13,7 +13,7 @@ $pronadjen=false;
 */
 	
 	
-	$dbhost = 'localhost';
+	$dbhost=getenv('MYSQL_SERVICE_HOST');
 $dbuser = 'spirala';
 $dbpass = 'password';
 $conn = ($GLOBALS["___mysqli_ston"] = mysqli_connect($dbhost,  $dbuser,  $dbpass));
@@ -41,7 +41,7 @@ die('Could not connect: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
 			if(strpos($el1,$el2)!==false)
 			{
 				$string = $string."|". "{$row['id']}"."*". "{$row['naziv']}" . "^" . "{$row['cijena']}" . "%" . "{$row['ikona']}";
-			$pronadjen=true;
+				$pronadjen=true;
 
 			}
 

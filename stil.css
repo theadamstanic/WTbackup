@@ -15,6 +15,10 @@
 {
     display: none;
 }
+#sakrijBaza
+{
+    display:none;
+}
 
 #posaljiPoruku
 {
@@ -63,8 +67,12 @@
 	height:auto;
 	font-size:1vw;
 }
+#izbrisiDbButton,#createDbButton
+{
+	display:none;
+}
 
-#csvbutton,#admin_pretrazi,#dodajKorisnika,#dodajArtikal
+#csvbutton,#admin_pretrazi,#dodajKorisnika,#dodajArtikal,#narudzbe_button
 {
 	width:20%;text-align:center;height:auto;
 	font-size:1.2vw;

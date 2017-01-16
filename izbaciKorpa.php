@@ -24,7 +24,8 @@ foreach ($_SESSION["korpa"] as $element)
 }
 */
 $niz = array();
-$q=(int)$q;
+$q=(string)$q;
+
 
 foreach ($_SESSION["korpa"] as $element)
 {
@@ -32,15 +33,29 @@ foreach ($_SESSION["korpa"] as $element)
 }
 $_SESSION["korpa"]=array();
 
-for($i=0;$i<count($niz);$i++)
-{
-	if($i==$q) 
-	{
-		continue;
+$nadjen=false;
+	foreach($niz as $artikal)
+		{
+			
+				$j=0;
+				$id="";
+				while($artikal[$j]!=',')
+				{
+					$id=$id.$artikal[$j];
+					$j++;
+				}
+				if($id==$q && !$nadjen) 
+				{
+					$nadjen=true;
+					continue;
+					
+				}
+				else
+				{
+					array_push($_SESSION["korpa"],$artikal);
+				}
+			
 	}
-	else
-	{
-		array_push($_SESSION["korpa"],$niz[$i]);
-	}
-}
+
+	echo "lmao";
 ?>

@@ -16,7 +16,7 @@ function ucitajizXML()
     $file = 'korisnici.xml';
     if(!$xml = simplexml_load_file($file))
         exit('Failed to open '.$file);
-
+$pronadjen=false;
 foreach($xml->children() as $korisnik)
 {
 	if($korisnik->username==$username)
@@ -55,8 +55,8 @@ if($pronadjen==false)
 }
 
 
-ucitajizXML();
-return;
+//ucitajizXML();
+//return;
 $username = $_REQUEST['username'];
 $password= $_REQUEST['password'];
 
@@ -66,7 +66,7 @@ $password = htmlspecialchars($password, ENT_QUOTES, "UTF-8");
 
 $pronadjen=false;
 
-$dbhost = 'localhost';
+$dbhost=getenv('MYSQL_SERVICE_HOST');
 $dbuser = 'spirala';
 $dbpass = 'password';
 $conn = ($GLOBALS["___mysqli_ston"] = mysqli_connect($dbhost,  $dbuser,  $dbpass));

@@ -3,7 +3,7 @@
 
 function zag() {
     header("{$_SERVER['SERVER_PROTOCOL']} 200 OK");
-    header('Content-Type: text/html');
+    header('Content-Type: application/json');
     header('Access-Control-Allow-Origin: *');
 }
 function rest_get($request, $data) {
@@ -15,7 +15,7 @@ $nazivi=array();
 $cijene=array();
 $ikone=array();
 
-$dbhost = 'localhost';
+$dbhost=getenv('MYSQL_SERVICE_HOST');
 $dbuser = 'spirala';
 $dbpass = 'password';
 $conn = ($GLOBALS["___mysqli_ston"] = mysqli_connect($dbhost,  $dbuser,  $dbpass));

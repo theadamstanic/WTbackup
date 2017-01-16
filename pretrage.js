@@ -18,6 +18,26 @@ function restServis()
 	window.open("servisStranica.php?q=" + tekst);
 }
 
+function pokaziPorukuBaza()
+{
+    if(document.getElementById("sakrijBaza").style.display=="none")
+	{
+				document.getElementById("sakrijBaza").style.display="block";
+		document.getElementById("createDbButton").style.display="block";
+
+		document.getElementById("izbrisiDbButton").style.display="block";
+    }
+    else
+	{
+		        document.getElementById("sakrijBaza").style.display="none";
+				        document.getElementById("createDbButton").style.display="none";
+
+        document.getElementById("izbrisiDbButton").style.display="none";
+    }
+    
+    
+}
+
 function pomocna_prikazi(rezultat)
 {
 	
@@ -98,6 +118,29 @@ function pomocna_prikazi(rezultat)
 
 }
 
+function pretrazi_narudzbe()
+{
+	var x = new XMLHttpRequest();
+	x.onreadystatechange = function()
+	{
+		if(this.readyState==4 && this.status==200)
+		{
+			document.getElementById("admin_pretraga").innerHTML=this.responseText;
+		}
+	};
+	var nacin="";
+	if(document.getElementById("select").value=="korisnici")
+		nacin="korisnik";
+	else
+		nacin="artikal";
+	
+	var q=document.getElementById("inputlivesearch").value;
+	
+	x.open("GET","pretraga_narudzbe.php?q=" + q+"&nacin="+nacin,true);
+
+	x.send();
+}
+
 function napuni_korpu()
 {
 	/*var x = new XMLHttpRequest();
@@ -122,7 +165,6 @@ function uKorpu(ref)
 	{
 		if(this.readyState==4 && this.status==200)
 		{
-	
 		}
 	};
 
@@ -473,6 +515,27 @@ function prikazi_artikle(rezultat)
 		//alert(string_admin);
 	}
 	
+	function zavrsiKupovinu()
+	{
+		var x = new XMLHttpRequest();
+	x.onreadystatechange = function()
+	{
+		if(this.readyState==4 && this.status==200)
+		{
+						ucitajstranicu("Korpa.php");
+
+						document.getElementById("hvala").innerHTML+="Hvala vam na kupovini";
+
+
+		}
+	};
+
+	x.open("GET","zavrsiKupovinu.php?q=",true);
+
+	x.send();
+	}
+	
+	
 	function izbaciIzKorpe(ref)
 	{
 		//var ref2 = ref.substr(0, ref.indexOf(" "));
@@ -482,10 +545,8 @@ function prikazi_artikle(rezultat)
 	{
 		if(this.readyState==4 && this.status==200)
 		{
+			ucitajstranicu("Korpa.php");
 
-			
-					ucitajstranicu("Korpa.php");
-			
 
 		}
 	};
